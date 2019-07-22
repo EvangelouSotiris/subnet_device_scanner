@@ -2,6 +2,7 @@ import nmap
 import json
 import sys
 import socket
+from netid_finder import net_id_calculator as calc
 
 LightGreen = "\x1b[92m"
 LightRed = "\x1b[91m"
@@ -13,10 +14,7 @@ Blue = "\x1b[94m"
 B_Default = "\x1b[49m"
 B_White = "\x1b[107m"
 
-DEFAULT_CIDR=24
-local_ip = socket.gethostbyname(socket.gethostname())
-if DEFAULT_CIDR == 24:
-    net_id = local_ip.split('.')[0]+'.'+local_ip.split('.')[1]+'.'+local_ip.split('.')[2]+'.0/24'
+net_id = calc()
 
 print('Searching devices in the network: ' +  net_id )
 nm = nmap.PortScanner()
