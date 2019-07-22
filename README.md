@@ -16,3 +16,6 @@ git clone https://github.com/EvangelouSotiris/python-network-discoverer.git && c
 ```
 sudo python3 net_discoverer.py
 ```
+
+## Author
+* **Evangelou Sotiris** - *Developer* - [Github](https://github.com/EvangelouSotiris)
