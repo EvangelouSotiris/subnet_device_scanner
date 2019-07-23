@@ -31,9 +31,9 @@ for host in nm.all_hosts():
     [print('-', end="") for i in range(len(host))]
     print(Default) 
     main = result['scan'][host]
-    del result['nmap']
-    del main['portused']
+    
     #print(json.dumps(result, indent=4))
+    
     if main['hostnames'][0]['name'] != '':
         print('Hostname= '+ main['hostnames'][0]['name'])
     if "mac" in main['addresses']:
@@ -41,22 +41,27 @@ for host in nm.all_hosts():
         print('MAC address= ' + mac)
         if len(main['vendor'])!=0:
             print('Vendor= ' + main['vendor'][mac])
-    print('State= '+ LightGreen + main['status']['state'] + Default)
+    if main['status']['state'] == 'up':
+        print('State= '+ LightGreen + main['status']['state'] + Default)
+    else:
+        print('State= '+ LightRed + main['status']['state'] + Default)
+        continue
     if 'uptime' in main:
         print('Uptime= '+ str(int(main['uptime']['seconds'])/60) + ' minutes')
-    print('TCP Services:')
-    for port in main['tcp']:
-        print('|-'+ Cyan + main['tcp'][port]['name'] + Default, end="")
-        if main['tcp'][port]['version'] != '':
-            print('(v. ' + main['tcp'][port]['version']+ ')', end ="")
-        print(' at port ' + str(port) + ' - ', end="")
-        if main['tcp'][port]['state'] == 'open':
-            print(LightGreen + main['tcp'][port]['state'] + Default, end ="")
-        else:
-            print(LightRed + main['tcp'][port]['state'] + Default, end ="")
-        if main['tcp'][port]['product'] != "":
-            print( ' - Product: ' + main['tcp'][port]['product'])
-        else: print()
+    if 'tcp' in main:
+        print('TCP Services:')
+        for port in main['tcp']:
+            print('|-'+ Cyan + main['tcp'][port]['name'] + Default, end="")
+            if main['tcp'][port]['version'] != '':
+                print('(v. ' + main['tcp'][port]['version']+ ')', end ="")
+            print(' at port ' + str(port) + ' - ', end="")
+            if main['tcp'][port]['state'] == 'open':
+                print(LightGreen + main['tcp'][port]['state'] + Default, end ="")
+            else:
+                print(LightRed + main['tcp'][port]['state'] + Default, end ="")
+            if main['tcp'][port]['product'] != "":
+                print( ' - Product: ' + main['tcp'][port]['product'])
+            else: print()
     print('Operating System= ' + Magenta + main['osmatch'][0]['name'] + Default)
     print('Common Platform Enumeration:')
     for os in range(len(main['osmatch'][0]['osclass'])):
