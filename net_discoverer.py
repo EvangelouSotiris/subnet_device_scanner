@@ -16,10 +16,13 @@ B_White = "\x1b[107m"
 
 net_id = calc()
 
-print('Searching devices in the network: ' +  net_id )
+print('\nSearching devices in the network: ' +  net_id )
 nm = nmap.PortScanner()
 nm.scan(hosts=net_id, arguments='-sP')
 nm2 = nmap.PortScanner()
+
+print(LightGreen+str(len(nm.all_hosts()))+ Default + ' devices found.')
+
 for host in nm.all_hosts():
     result = nm2.scan(hosts=host, arguments='-sV -O -v')
     print(Blue)
