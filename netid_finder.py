@@ -4,14 +4,15 @@ import struct
 import sys
 import netifaces
 
-def get_ip_address():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(("8.8.8.8", 80))
-    
-    return s.getsockname()[0]
-
 def net_id_calculator(iface):
+    
+    if iface not in netifaces.interfaces():
+        print("There is no network interface named " + iface + ".")
+        sys.exit(1)
     classfull_addressing=[0,8,16,24,32]
+    if netifaces.AF_INET not in netifaces.ifaddresses(iface):
+        print("No IP corresponding to that interface.")
+        exit(1)
     netmask = netifaces.ifaddresses(iface)[netifaces.AF_INET][0]['netmask']
     local_ip = netifaces.ifaddresses(iface)[netifaces.AF_INET][0]['addr']
    
