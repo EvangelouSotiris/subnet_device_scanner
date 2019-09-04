@@ -1,10 +1,14 @@
 # Network Discovery with Python, using python-nmap library.
 
 ## Prerequisites
-- The user needs to have **sudo priviledges**, as the nmap commands running require sudo.
+- The user needs to have **sudo priviledges**, as the nmap commands running require sudo for OS inspection.
 - Install python-nmap library for python with:
 ```cmd
 pip install python-nmap
+```
+- Install inetfaces library for python with:
+```cmd
+pip install netifaces
 ```
 
 ## Running
@@ -12,9 +16,10 @@ pip install python-nmap
 ```
 git clone https://github.com/EvangelouSotiris/python-network-discoverer.git && cd python-network-discoverer
 ```
+- Make sure that you know the interface in which you want to run the network discovery. (You can check the network interfaces using `ip a` , or `ifconfig` in the console).
 - Run net_discoverer.py script with sudo:
 ```
-sudo python3 net_discoverer.py
+sudo python3 net_discoverer.py <iface>
 ```
 
 ## Author
