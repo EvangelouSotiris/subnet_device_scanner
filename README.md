@@ -1,5 +1,8 @@
 # Network Discovery with Python, using python-nmap library.
 
+## Overview
+This network discoverer is a python script that takes a network interface as input and scans the whole subnet with nmap in order to identify other devices, and give information about their hostname/MAC/uptime/ports/services/OS/hardware etc.
+
 ## Prerequisites
 - The user needs to have **sudo priviledges**, as the nmap commands running require sudo for OS inspection.
 - Install python-nmap library for python with:
