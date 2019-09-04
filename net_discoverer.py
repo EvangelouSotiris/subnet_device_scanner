@@ -14,6 +14,9 @@ Blue = "\x1b[94m"
 B_Default = "\x1b[49m"
 B_White = "\x1b[107m"
 
+if  len(sys.argv) < 2:
+    print("Please specify your iface as argument.")
+    sys.exit(1)
 net_id = calc(sys.argv[1])
 
 print('\nSearching devices in the network: ' +  net_id )
