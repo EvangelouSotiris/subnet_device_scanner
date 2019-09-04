@@ -2,13 +2,19 @@ import socket
 import fcntl
 import struct
 import sys
+import netifaces
 
-def net_id_calculator():
+def get_ip_address():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    
+    return s.getsockname()[0]
+
+def net_id_calculator(iface):
     classfull_addressing=[0,8,16,24,32]
-
-    iface='ens18'
-    netmask = socket.inet_ntoa(fcntl.ioctl(socket.socket(socket.AF_INET, socket.SOCK_DGRAM), 35099, struct.pack('256s', bytes(iface[:15], 'utf-8')))[20:24])
-    local_ip = socket.gethostbyname(socket.gethostname())
+    netmask = netifaces.ifaddresses(iface)[netifaces.AF_INET][0]['netmask']
+    local_ip = netifaces.ifaddresses(iface)[netifaces.AF_INET][0]['addr']
+   
     ip_parts = local_ip.split('.')
     pieces = netmask.split('.')
     netmask_parts = ['','','','']
