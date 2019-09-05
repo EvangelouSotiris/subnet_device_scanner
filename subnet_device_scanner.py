@@ -65,7 +65,8 @@ for host in nm.all_hosts():
             if main['tcp'][port]['product'] != "":
                 print( ' - Product: ' + main['tcp'][port]['product'])
             else: print()
-    print('Operating System= ' + Magenta + main['osmatch'][0]['name'] + Default)
-    print('Common Platform Enumeration:')
-    for os in range(len(main['osmatch'][0]['osclass'])):
-        print('|-' + main['osmatch'][0]['osclass'][os]['type'] + ' - ' + main['osmatch'][0]['osclass'][os]['cpe'][0])
+    if len(main['osmatch']) > 0:
+        print('Operating System= ' + Magenta + main['osmatch'][0]['name'] + Default)
+        print('Common Platform Enumeration:')
+        for os in range(len(main['osmatch'][0]['osclass'])):
+            print('|-' + main['osmatch'][0]['osclass'][os]['type'] + ' - ' + main['osmatch'][0]['osclass'][os]['cpe'][0])
