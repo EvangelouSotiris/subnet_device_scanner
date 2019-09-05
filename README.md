@@ -13,6 +13,12 @@ pip install python-nmap
 ```cmd
 pip install netifaces
 ```
+**Troubleshooting**
+- If you did pip install the libraries but you are met with the error *ModuleNotFoundError* , please try installing the libraries with apt using:
+```cmd
+sudo apt install python3-nmap
+sudo apt install python3-netifaces
+```
 
 ## Running
 - Clone the repository with the two scripts:
