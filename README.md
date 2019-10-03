@@ -30,6 +30,8 @@ git clone https://github.com/EvangelouSotiris/subnet_device_scanner.git && cd su
 ```
 sudo python3 subnet_device_scanner.py <iface>
 ```
+## TODO
+implement classless addressing functionality.
 
 ## Author
 * **Evangelou Sotiris** - *Developer* - [Github](https://github.com/EvangelouSotiris)
